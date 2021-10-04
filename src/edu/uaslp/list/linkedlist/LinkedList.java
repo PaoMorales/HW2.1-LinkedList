@@ -1,15 +1,13 @@
 package edu.uaslp.list.linkedlist;
 
-import edu.uaslp.list.linkedlist.Node;
-
-public class LinkedList {
-    private Node head;
-    private Node tail;
+public class LinkedList<H> {
+    private Node<H> head;
+    private Node<H> tail;
     private int size;
 
 
-    public void add(int dato){
-        Node node = new Node();
+    public void add(H dato){
+        Node<H> node = new Node<>();
         node.data = dato;
 
         if(head == null){
@@ -30,20 +28,20 @@ public class LinkedList {
         return size;
     }
 
-    public int getAt(int index){
+    public H getAt(int index){
         int counter = 0;
-        Node it = head;
+        Node<H> it = head;
 
         while(counter < index && it != null){
             counter++;
             it = it.next;
         }
-        return it == null ? 0 : it.data;
+        return it == null ? null : it.data;
     }
 
     public void delete(int index){
         int counter = 0;
-        Node iterator = head;
+        Node<H> iterator = head;
 
         if(index < 0 || index >= size){
             return;
@@ -70,9 +68,9 @@ public class LinkedList {
     }
 
 
-    public void insert(int data, int index){
+    public void insert(H data, int index){
         int counter = 0;
-        Node iterator = head;
+        Node<H> iterator = head;
 
         if(index < 0 || index > size){
             return;
@@ -88,7 +86,7 @@ public class LinkedList {
             counter++;
         }
 
-        Node node = new Node();
+        Node<H> node = new Node();
         node.data = data;
         node.next = iterator;
         node.previous = iterator.previous;
@@ -102,7 +100,7 @@ public class LinkedList {
     }
 
     public void print(){
-        Node iterator = head;
+        Node<H> iterator = head;
 
         while(iterator != null){
             System.out.println(iterator.data);
