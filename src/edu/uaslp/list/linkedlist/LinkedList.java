@@ -1,5 +1,6 @@
 package edu.uaslp.list.linkedlist;
 import edu.uaslp.list.List;
+import edu.uaslp.list.Iterator;
 
 public class LinkedList<H> implements List<H>{
     private Node<H> head;
@@ -42,27 +43,27 @@ public class LinkedList<H> implements List<H>{
 
     public void delete(int index){
         int counter = 0;
-        Node<H> iterator = head;
+        Node<H> it = head;
 
         if(index < 0 || index >= size){
             return;
         }
 
-        while(counter < index && iterator != null){
-            iterator = iterator.next;
+        while(counter < index && it != null){
+            it = it.next;
             counter++;
         }
 
-        if(iterator.previous == null){
-            head = iterator.next;
+        if(it.previous == null){
+            head = it.next;
         } else{
-            iterator.previous.next = iterator.next;
+            it.previous.next = it.next;
         }
 
-        if(iterator.next == null){
-            tail = iterator.previous;
+        if(it.next == null){
+            tail = it.previous;
         } else {
-            iterator.next.previous = iterator.previous;
+            it.next.previous = it.previous;
         }
 
         size--;
@@ -71,7 +72,7 @@ public class LinkedList<H> implements List<H>{
 
     public void insert(H data, int index){
         int counter = 0;
-        Node<H> iterator = head;
+        Node<H> it = head;
 
         if(index < 0 || index > size){
             return;
@@ -82,30 +83,34 @@ public class LinkedList<H> implements List<H>{
             return;
         }
 
-        while (counter < index && iterator != null){
-            iterator = iterator.next;
+        while (counter < index && it != null){
+            it = it.next;
             counter++;
         }
 
         Node<H> node = new Node();
         node.data = data;
-        node.next = iterator;
-        node.previous = iterator.previous;
+        node.next = it;
+        node.previous = it.previous;
 
-        if(iterator.previous == null){
+        if(it.previous == null){
             head = node;
         } else {
-            iterator.previous.next = node;
+            it.previous.next = node;
         }
-        iterator.previous = node;
+        it.previous = node;
     }
 
     public void print(){
-        Node<H> iterator = head;
+        Node<H> it = head;
 
-        while(iterator != null){
-            System.out.println(iterator.data);
-            iterator = iterator.next;
+        while(it != null){
+            System.out.println(it.data);
+            it = it.next;
         }
+    }
+
+    public Iterator<H> getIterator(){
+        return new LinkedListIterator<>(head);
     }
 }

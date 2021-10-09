@@ -10,7 +10,11 @@ public interface List<T> {
 
     void delete(int index);
 
+    Iterator<T> getIterator();
+
     void insert(T data, int index);
 
     void print();
+
+
 }

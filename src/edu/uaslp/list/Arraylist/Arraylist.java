@@ -1,5 +1,5 @@
 package edu.uaslp.list.Arraylist;
-
+import edu.uaslp.list.Iterator;
 import edu.uaslp.list.List;
 public class Arraylist<T> implements List<T>{
 
@@ -7,8 +7,12 @@ public class Arraylist<T> implements List<T>{
         private Object[] array;
         private int nextValid;
 
+    @Override
+    public Iterator<T> getIterator() {
+        return new ArraylistIterator<>(this);
+    }
 
-        public Arraylist(){
+    public Arraylist(){
             array = new Object [INITIAL_SIZE];
         }
 
@@ -67,4 +71,5 @@ public class Arraylist<T> implements List<T>{
             System.arraycopy(array, 0, newArray, 0, array.length);
             array = newArray;
         }
+
     }

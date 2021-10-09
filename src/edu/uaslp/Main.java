@@ -3,6 +3,7 @@ package edu.uaslp;
 import edu.uaslp.list.linkedlist.LinkedList;
 import edu.uaslp.list.Arraylist.Arraylist;
 import edu.uaslp.list.List;
+import edu.uaslp.list.Iterator;
 
 
 public class Main {
@@ -32,6 +33,14 @@ public class Main {
         System.out.println("Libros en posicion 3 :" + libros.getAt(3));
 
         libros.print();
+
+        System.out.println("Datos de la iteracion");
+
+        Iterator<Integer> it = alumnos.getIterator();
+        while (it.hasNext()){
+            int data = it.next();
+            System.out.println(data);
+        }
 
     }
 }
