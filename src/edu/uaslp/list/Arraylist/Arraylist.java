@@ -1,10 +1,9 @@
 package edu.uaslp.list.Arraylist;
 
-import java.util.List;
+import edu.uaslp.list.List;
+public class Arraylist<T> implements List<T>{
 
-public class Arraylist<T>{
-
-    private static final  int INITIAL_SIZE = 2;
+    private static final int INITIAL_SIZE = 2;
         private Object[] array;
         private int nextValid;
 
@@ -26,9 +25,8 @@ public class Arraylist<T>{
             if (index < 0 || index >= nextValid) {
                 return;
             }
-            for (int i = index; i < nextValid - 1; i++) {
-                array[i] = array[i + 1];
-            }
+            if (nextValid - 1 - index >= 0)
+                System.arraycopy(array, index + 1, array, index, nextValid - 1 - index);
             nextValid--;
         }
 
@@ -39,9 +37,8 @@ public class Arraylist<T>{
             if (nextValid >= array.length) {
                 increaseArrayCapacity();
             }
-            for (int i = nextValid; i > index; i--) {
-                array[i + 1] = array[i];
-            }
+            if (nextValid - index >= 0)
+                System.arraycopy(array, index, array, index + 1, nextValid - index);
             array[index] = data;
             nextValid++;
         }
@@ -71,77 +68,3 @@ public class Arraylist<T>{
             array = newArray;
         }
     }
-
-    /*
-    private Node<G> head;
-    private Node<G> tail;
-    private int size;
-
-    public void add(G data){
-        Node<G> node = new Node<>(data);
-        node.previous = tail;
-
-        if(tail != null){
-            tail.next = node;
-        }
-
-        if (head == null){
-            head = node;
-        }
-
-        tail = node;
-        size++;
-    }
-
-    public G get (int index){
-        Node<G> currentNode = head;
-        int currentIndex = 0;
-
-        while (currentIndex < index){
-            currentNode = currentNode.next;
-            currentIndex++;
-        }
-        return currentNode.data;
-    }
-
-    public void delete (int index){
-        Node<G> currentNode = head;
-        int currentIndex = 0;
-
-        if (index < 0 || index >= size){
-            return;
-        }
-        size--;
-
-        if (size == 0){
-            head = null;
-            tail = null;
-            return;
-        }
-
-        if (index == size){
-            tail = tail.previous;
-            tail.next = null;
-        }
-
-        if(index == 0){
-            head = head.next;
-            head.previous = null;
-        }
-
-        if (index > 0 && index < size){
-            while (currentIndex < index){
-                currentNode = currentNode.next;
-                currentIndex++;
-            }
-            currentNode.previous.next = currentNode.next;
-            currentNode.next.previous = currentNode.previous;
-        }
-    }
-
-    public int getSize(){
-        return size;
-    }
-
-
-}*/

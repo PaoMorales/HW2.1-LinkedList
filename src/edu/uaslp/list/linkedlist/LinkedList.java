@@ -1,6 +1,7 @@
 package edu.uaslp.list.linkedlist;
+import edu.uaslp.list.List;
 
-public class LinkedList<H> {
+public class LinkedList<H> implements List<H>{
     private Node<H> head;
     private Node<H> tail;
     private int size;
